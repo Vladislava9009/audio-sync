@@ -1,0 +1,75 @@
+---
+to: "<%= componentType === 'Form' ? `src/components/${folder}/${h.changeCase.pascal(name)}/${h.changeCase.pascal(name)}.tsx` : null %>"
+---
+import * as React from 'react'
+import { useCallback, useMemo, useRef, useTranslation } from '@hooks'
+import { Form, Field, TextField } from '@components'
+import { TForm } from '@typings'
+import styles from './styles.css'
+
+type TProps = {
+	hidden?: boolean
+}
+
+const <%= h.changeCase.pascal(name) %>: React.FC<TProps> = ({ hidden }) => {
+	const { t } = useTranslation()
+
+	// Field refs.
+	const seconfFieldRef = useRef<TextInput>()
+
+	// Form handlers
+	const initialFormValues = useMemo(() => ({}), [])
+	const validateForm = useCallback((values: Partial<TForm>): Partial<TForm> => {
+		const errors: Partial<TForm> = {}
+		// if (!values.first) {
+		// 	errors.first = t('Invalid value')
+		// }
+		return errors
+	}, [])
+	const submitForm = useCallback((values: TForm) => console.log('Submit', values), [])
+
+	return hidden ? null : (
+		<Form<TForm>
+			initialValues={initialFormValues}
+			validateOnBlur={true}
+			onSubmit={submitForm}
+			validate={validateForm}
+			subscription={{ submitting: true, pristine: true }}
+		>
+			{({ handleSubmit, submitting, pristine }) => (
+				<>
+					<Field name="first">
+						{({ input, meta }) => (
+							<TextField
+								nextField={seconfFieldRef}
+								placeholder={t('')}
+								returnKeyType="next"
+								editable={!submitting}
+								{...input}
+								{...meta}
+							/>
+						)}
+					</Field>
+					<Field name="second">
+						{({ input, meta }) => (
+							<TextField
+								ref={seconfFieldRef}
+								placeholder={t('')}
+								returnKeyType="send"
+								editable={!submitting}
+								onSubmitEditing={handleSubmit}
+								{...input}
+								{...meta}
+							/>
+						)}
+					</Field>
+					<Button disabled={submitting || pristine} onPress={handleSubmit}>
+						{t('')}
+					</Button>
+				</>
+			)}
+		</Form>
+	)
+}
+
+export default <%= h.changeCase.pascal(name) %>;

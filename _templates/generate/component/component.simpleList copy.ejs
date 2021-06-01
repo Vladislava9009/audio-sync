@@ -1,0 +1,42 @@
+---
+to: "<%= componentType === 'simple_list' ? `src/components/${folder}/${h.changeCase.pascal(name)}/${h.changeCase.pascal(name)}.tsx` : null %>"
+---
+import * as React from 'react'
+import { useCallback, useMemo } from '@hooks'
+import { View } from '@components'
+import { ViewProps, TItem } from '@typings'
+import <%= h.changeCase.pascal(name) %>Item from './<%= h.changeCase.pascal(name) %>Item'
+import styles from './styles.css'
+
+type TProps = ViewProps & {
+	data: TItem[]
+	onPress: (id: TItem["id"]) => void
+	hidden?: boolean
+}
+
+const <%= h.changeCase.pascal(name) %>: React.FC<TProps> = ({ hidden, data = [], onPress, ...flatListProps }) => {
+
+	const handlePress = useCallback(
+		(id) => {
+			onPress(id)
+		},
+		[onPress],
+	)
+
+	// Render list.
+	const keyExtractor = useCallback(item => String(item.id), [])
+	const renderItem = useCallback(
+		(item) => (
+			<<%= h.changeCase.pascal(name) %>Item key={keyExtractor(item)} {...item} onPress={handlePress} />
+		),
+		[],
+	)
+
+	return hidden ? null : (
+		<View style={styles.contentContainer}> 
+			{data.map(renderItem)}
+		</View>
+	)
+}
+
+export default <%= h.changeCase.pascal(name) %>;

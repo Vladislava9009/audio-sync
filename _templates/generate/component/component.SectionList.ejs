@@ -1,0 +1,56 @@
+---
+to: "<%= componentType === 'SectionList' ? `src/components/${folder}/${h.changeCase.pascal(name)}/${h.changeCase.pascal(name)}.tsx` : null %>"
+---
+import * as React from 'react'
+import { useCallback, useMemo } from '@hooks'
+import { SectionList } from '@components'
+import { SectionListProps, TItem } from '@typings'
+import <%= h.changeCase.pascal(name) %>Item from './<%= h.changeCase.pascal(name) %>Item'
+import <%= h.changeCase.pascal(name) %>SectionHeader from './<%= h.changeCase.pascal(name) %>SectionHeader'
+import styles from './styles.css'
+
+type TProps = SectionListProps<TItem> & {
+	onPress: (id: TItem["id"]) => void
+	hidden?: boolean
+}
+
+const <%= h.changeCase.pascal(name) %>: React.FC<TProps> = ({ hidden, sections = [], onPress, ...sectionListProps }) => {
+
+	const handlePress = useCallback(
+		(id) => {
+			onPress(id)
+		},
+		[onPress],
+	)
+
+	// Render list.
+	const keyExtractor = useCallback(item => String(item.id), [])
+	const renderItem = useCallback(
+		({ item }) => (
+			<<%= h.changeCase.pascal(name) %>Item {...item} onPress={handlePress} />
+		),
+		[],
+	)
+	const renderSectionHeader = useCallback(
+		({ section }) => (
+			<<%= h.changeCase.pascal(name) %>SectionHeader {...section} onPress={handlePress} />
+		),
+		[],
+	)
+
+	return hidden ? null : (
+		<SectionList 
+			sections={sections}
+			renderItem={renderItem} 
+			renderSectionHeader={renderSectionHeader}
+			keyExtractor={keyExtractor} 
+			extraData={null}
+			contentContainerStyle={styles.contentContainer} 
+			keyboardShouldPersistTaps="handled" 
+			bounces={false}
+			{...sectionListProps}
+		/>
+	)
+}
+
+export default <%= h.changeCase.pascal(name) %>;

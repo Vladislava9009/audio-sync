@@ -1,0 +1,24 @@
+---
+to: "<%= ['FlatList', 'SectionList', 'simple_list'].includes(componentType) ? `src/components/${folder}/${h.changeCase.pascal(name)}/${h.changeCase.pascal(name)}Item.tsx` : null %>"
+---
+import * as React from 'react'
+import { useCallback } from '@hooks'
+import { Touchable, Text } from '@components'
+import { TItem } from '@typings'
+import styles from './styles.css'
+
+type TProps = TItem & {
+	onPress: (id: TItem["id"]) => void
+}
+
+const <%= h.changeCase.pascal(name) %>Item: React.FC<TProps> = ({ id, onPress }) => {
+	const handlePress = useCallback(() => onPress(id), [id, onPress])
+
+	return (
+		<Touchable style={styles.itemContainer} onPress={handlePress}>
+			<Text style={styles.itemTitle} numberOfLines={1} ellipsizeMode="tail">{id}</Text>
+		</Touchable>
+	)
+}
+
+export default <%= h.changeCase.pascal(name) %>Item;

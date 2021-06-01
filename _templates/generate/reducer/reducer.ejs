@@ -1,0 +1,17 @@
+---
+to: src/global/reducers/<%= name %>.ts
+---
+import { addReducer } from 'reactn';
+import { apiClient, api } from '@services'
+import { T } from '@typings'
+
+addReducer('<%= name %>', async (global, dispatch, params) => {
+	try {
+		const response = await apiClient(api.myRequest())
+		const result = response.data
+		return { result }
+	}
+	catch (error) {
+
+	}
+});
