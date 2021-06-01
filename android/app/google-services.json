@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "720824212003",
+    "project_id": "audiosync-29506",
+    "storage_bucket": "audiosync-29506.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720824212003:android:83fa2c8ec529c97e7c6f96",
+        "android_client_info": {
+          "package_name": "com.audioasync"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720824212003-1d1e65e46eqjmmddttopvomlf18tkv4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.audioasync",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "720824212003-l0nbj0pv63i875ej7o55had7v3vh3ua0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3EhFlr4fJtLomXALX9Z8SCoepGNUhjoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720824212003-l0nbj0pv63i875ej7o55had7v3vh3ua0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
