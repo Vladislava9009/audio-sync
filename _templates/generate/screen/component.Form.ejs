@@ -1,0 +1,105 @@
+---
+to: "<%= componentType === 'Form' ? `src/screens/${h.changeCase.pascal(name)}/${h.changeCase.pascal(name)}.tsx` : null %>"
+---
+import * as React from 'react'
+import {
+	useEffect,
+	useCallback,
+	useMemo,
+	useRef,
+	useTranslation,
+	useNavigation,
+	useRoute,
+	useGlobal,
+	useDispatch,
+	useRequest,
+	useState,
+} from '@hooks'
+import { ErrorBoundary, KeyboardAwareScrollView, Form, Field, TextField, TextInput, Button } from '@components'
+import { api, alert } from '@services'
+import { StackNavigationProp, RouteProp, TScreenParams, TForm } from '@typings'
+import styles from './styles.css'
+
+const <%= h.changeCase.pascal(name) %>Screen: React.FC<TProps> = () => {
+	// Main screen data.
+	const { t } = useTranslation()
+	const { navigate } = useNavigation<TProps['navigation']>()
+	const { params } = useRoute<TProps['route']>()
+
+	// .
+	// const { data: myData, fetching, fetched } = useRequest<[], void>({
+	// 	request: api.getSomething(),
+	// 	onError: (error) => alert.error(error)
+	// })
+	// const [_, set_] = useGlobal('something')
+	// const callSomething = useDispatch('callSomething')
+
+	// Field refs.
+	const seconfFieldRef = useRef<TextInput>()
+
+	// Form handlers.
+	const initialFormValues = useMemo(() => ({}), [])
+	const validateForm = useCallback((values: Partial<TForm>): Partial<TForm> => {
+		const errors: Partial<TForm> = {}
+		// if (!values.first) {
+		// 	errors.first = t('Invalid value')
+		// }
+		return errors
+	}, [])
+	const submitForm = useCallback((values: TForm) => console.log('Submit', values), [])
+
+	return (
+		<ErrorBoundary>
+			<KeyboardAwareScrollView keyboardShouldPersistTaps="handled" bounces={false}>
+				<Form<TForm>
+					initialValues={initialFormValues}
+					validateOnBlur={true}
+					onSubmit={submitForm}
+					validate={validateForm}
+					subscription={{ submitting: true, pristine: true }}
+				>
+					{({ handleSubmit, submitting, pristine }) => (
+						<>
+							<Field name="first">
+								{({ input, meta }) => (
+									<TextField
+										nextField={seconfFieldRef}
+										placeholder={t('')}
+										returnKeyType="next"
+										editable={!submitting}
+										{...input}
+										{...meta}
+									/>
+								)}
+							</Field>
+							<Field name="second">
+								{({ input, meta }) => (
+									<TextField
+										ref={seconfFieldRef}
+										placeholder={t('')}
+										returnKeyType="send"
+										editable={!submitting}
+										onSubmitEditing={handleSubmit}
+										{...input}
+										{...meta}
+									/>
+								)}
+							</Field>
+							<Button disabled={submitting || pristine} onPress={handleSubmit}>
+								{t('')}
+							</Button>
+						</>
+					)}
+				</Form>
+			</KeyboardAwareScrollView>
+		</ErrorBoundary>
+	)
+}
+
+
+type TProps = {
+	navigation: StackNavigationProp<TScreenParams, '<%= h.changeCase.pascal(name) %>'>
+	route: RouteProp<TScreenParams, '<%= h.changeCase.pascal(name) %>'>
+}
+
+export default <%= h.changeCase.pascal(name) %>Screen;

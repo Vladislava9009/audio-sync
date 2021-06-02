@@ -1,0 +1,21 @@
+---
+to: "<%= ['SectionList'].includes(componentType) ? `src/components/${folder}/${h.changeCase.pascal(name)}/${h.changeCase.pascal(name)}SectionHeader.tsx` : null %>"
+---
+import * as React from 'react'
+import { useCallback } from '@hooks'
+import { View, Text } from '@components'
+import { SectionListData, TItem } from '@typings'
+import styles from './styles.css'
+
+type TProps = SectionListData<TItem>
+	
+const <%= h.changeCase.pascal(name) %>SectionHeader: React.FC<TProps> = ({ title }) => {
+	return (
+		<View style={styles.sectionHeaderContainer}>
+			<Text style={styles.sectionHeaderTitle} numberOfLines={1} ellipsizeMode="tail">{title}</Text>
+		</Touchable>
+	)
+}
+
+
+export default <%= h.changeCase.pascal(name) %>SectionHeader;

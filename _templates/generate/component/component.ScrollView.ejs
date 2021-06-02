@@ -1,0 +1,21 @@
+---
+to: "<%= componentType === 'ScrollView' ? `src/components/${folder}/${h.changeCase.pascal(name)}/${h.changeCase.pascal(name)}.tsx` : null %>"
+---
+import * as React from 'react'
+import { useCallback, useMemo } from '@hooks'
+import { ScrollView } from '@components'
+import styles from './styles.css'
+
+type TProps = {
+	hidden?: boolean
+}
+
+const <%= h.changeCase.pascal(name) %>: React.FC<TProps> = ({ hidden,  }) => {
+	return hidden ? null : (
+		<ScrollView contentContainerStyle={styles.contentContainer} keyboardShouldPersistTaps="handled" bounces={false}>
+			{/* content */}
+		</ScrollView>
+	)
+}
+
+export default <%= h.changeCase.pascal(name) %>;
