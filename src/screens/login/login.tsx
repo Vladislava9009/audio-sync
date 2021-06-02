@@ -1,28 +1,34 @@
-import {ScrollView, View, Text} from '@components';
+import {ScrollView, View, Text, Observer, Input, FormField} from '@components';
+import {useUserStore} from '@store';
 import {TScreenParams} from '@typings';
 import * as React from 'react';
-
-import styles from './styles.css';
+import {Field, Form} from 'react-final-form';
+import {styles} from './login.style';
 
 const LoginScreen: React.FC<TProps> = () => {
-  // .
-  // const { data: myData, fetching, fetched } = useRequest<[], void>({
-  // 	request: api.getSomething(),
-  // 	onError: (error) => alert.error(error)
-  // })
-  // const [_, set_] = useGlobal('something')
-  // const callSomething = useDispatch('callSomething')
+  const userStore = useUserStore();
+
+  const onSubmit = () => {};
 
   return (
-    <ScrollView keyboardShouldPersistTaps="handled" bounces={false}>
-      <Text>LoginScreen</Text>
-    </ScrollView>
-
-    // <ErrorBoundary>
-    // 	<ScrollView contentContainerStyle={styles.contentContainer} keyboardShouldPersistTaps="handled" bounces={false}>
-    // 		<Text>LoginScreen</Text>
-    // 	</ScrollView>
-    // </ErrorBoundary>
+    <View />
+    // <ScrollView
+    //   contentContainerStyle={styles.container}
+    //   keyboardShouldPersistTaps="handled"
+    //   bounces={false}>
+    //   <Form onSubmit={onSubmit}>
+    //     {({handleSubmit, submitting, pristine}) => (
+    //       <>
+    //         <Field name="email">
+    //           {({input, meta}) => <FormField label="Email" {...input} />}
+    //         </Field>
+    //         <Field name="password">
+    //           {({input, meta}) => <FormField label="Password" {...input} />}
+    //         </Field>
+    //       </>
+    //     )}
+    //   </Form>
+    // </ScrollView>
   );
 };
 
