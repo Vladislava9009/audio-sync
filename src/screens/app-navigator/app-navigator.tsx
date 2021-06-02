@@ -1,24 +1,25 @@
 import * as React from 'react';
 import {NavigationContainer} from '@components';
 import {createStackNavigator} from '@react-navigation/stack';
-import {useUserStore} from '@store';
+import {observer, useUserStore} from '@store';
 import {routes} from '@constants';
-import {AuthStackNavigator} from './stack';
+import {AuthStackNavigator, MainStackNavigator} from './stack';
 import {routeNavigatorScreenOptions} from './options';
 
-const AppNavigatorScreen = () => {
+const AppNavigatorScreen = observer(() => {
   // Main screen data.
 
-  const {isAuthorized} = useUserStore();
+  const {user} = useUserStore();
   const RootStack = createStackNavigator();
+  console.log(user, 'user');
 
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={routeNavigatorScreenOptions}>
-        {!!isAuthorized ? (
+        {!!user ? (
           <RootStack.Screen
-            name={routes.AUTH_NAVIGATOR}
-            component={AuthStackNavigator}
+            name={routes.MAIN_NAVIGATOR}
+            component={MainStackNavigator}
           />
         ) : (
           <RootStack.Screen
@@ -29,6 +30,6 @@ const AppNavigatorScreen = () => {
       </RootStack.Navigator>
     </NavigationContainer>
   );
-};
+});
 
 export default AppNavigatorScreen;

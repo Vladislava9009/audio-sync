@@ -10,6 +10,7 @@ const routes: IHashMap<any> = Object.freeze({
   MAIN_NAVIGATOR: 'MainNavigator',
   AUTH_NAVIGATOR: 'AuthNavigator',
   LOGIN: 'Login',
+  HOME: 'Home',
 });
 
 export default routes;
