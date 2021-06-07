@@ -5,6 +5,7 @@ export {
   TextInput,
   Pressable,
   StyleSheet,
+  Image,
 } from 'react-native';
 
 // navigation
@@ -16,6 +17,7 @@ export {Observer} from 'mobx-react';
 export {Input} from './input';
 export {FormField} from './form-field';
 export {Button} from './button';
+export {Player} from './player';
 export {default as ErrorBoundary} from './error-boundary';
 
 // Form

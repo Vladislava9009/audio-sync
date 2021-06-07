@@ -1,11 +1,31 @@
 import * as React from 'react';
-import {Button, ErrorBoundary, ScrollView, Text, View} from '@components';
-import {StackNavigationProp, RouteProp, TScreenParams, TAudio} from '@typings';
+import {
+  Button,
+  ErrorBoundary,
+  Player,
+  ScrollView,
+  Text,
+  View,
+} from '@components';
+import {
+  StackNavigationProp,
+  RouteProp,
+  TScreenParams,
+  TAudio,
+  TAction,
+} from '@typings';
 import {styles} from './styles';
-import api, {pickFile} from '@services';
+import api, {pause, pickFile, play} from '@services';
+import {ListItem} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen: React.FC<TProps> = () => {
   const [audioList, setAudioList] = React.useState<TAudio[]>([]);
+  const [activeSound, setActiveSound] = React.useState<{
+    audio: TAudio;
+    action: TAction;
+  } | null>(null);
+  console.log(activeSound, 'activeSound');
 
   React.useEffect(() => {
     getAudioList();
@@ -15,7 +35,6 @@ const HomeScreen: React.FC<TProps> = () => {
     try {
       const audioList: any = await api.getAudioList();
       setAudioList(audioList);
-      console.log(audioList, 'audioList');
     } catch (er) {
       console.log(er);
     }
@@ -24,18 +43,46 @@ const HomeScreen: React.FC<TProps> = () => {
   const uploadAudio = async () => {
     try {
       const audio = await pickFile();
-      console.log(audio);
       api.uploadAudio(audio);
     } catch (er) {
       console.log(er);
     }
-    // api.uploadAudio(pickFile())
   };
-
+  const onPlayerPress = (action: TAction) => {
+    activeSound && setActiveSound({...activeSound, action});
+    switch (action) {
+      case 'pause':
+        return pause();
+      case 'stop': {
+        return stop();
+      }
+      default: {
+        return activeSound?.audio && play(activeSound?.audio?.url);
+      }
+    }
+  };
   return (
     <ErrorBoundary>
       <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.audioListContainer} />
+        <View style={styles.audioListContainer}>
+          {audioList.map(audio => {
+            const onItenPress = () => {
+              setActiveSound({audio, action: 'play'});
+            };
+            return (
+              <ListItem key={audio.url} bottomDivider onPress={onItenPress}>
+                <Icon name={'assistive-listening-systems'} size={20} />
+                <ListItem.Content>
+                  <ListItem.Title>{audio.name}</ListItem.Title>
+                </ListItem.Content>
+                <Icon name={'ellipsis-v'} onPress={console.log} />
+              </ListItem>
+            );
+          })}
+        </View>
+        {activeSound && (
+          <Player {...activeSound} onPlayerPress={onPlayerPress} />
+        )}
         <Button onPress={uploadAudio}>
           <Text>Upload new audio</Text>
         </Button>

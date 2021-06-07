@@ -40,14 +40,24 @@ export const getAudioList = async () => {
     .child('audio/')
     .listAll();
   const data = await Promise.all(
-    imageRefs.items.map(ref => {
-      const data = {
-        url: ref.getDownloadURL(),
-        // meta: ref.getMetadata(),
+    imageRefs.items.map(async ref => {
+      const audio = {
+        url: await ref.getDownloadURL(),
+        meta: await ref.getMetadata(),
         name: ref.name,
       };
-      return data;
+      // audio.url = await getAudioUrl(ref)
+
+      return audio;
     }),
   );
   return data;
+};
+const getAudioUrl = async (ref: any) => {
+  try {
+    const url = await ref.getDownloadURL();
+    return url;
+  } catch (er) {
+    return er;
+  }
 };
