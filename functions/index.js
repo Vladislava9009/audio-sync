@@ -1,7 +1,6 @@
 const functions = require("firebase-functions");
 
 const admin = require('firebase-admin');
-const { getAdministration } = require("mobx/dist/internal");
 admin.initializeApp();
 
 exports.addAdminRole = functions.https.onCall((data, context) => {

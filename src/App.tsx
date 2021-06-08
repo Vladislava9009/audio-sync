@@ -1,11 +1,9 @@
-import {NavigationContainer} from '@components';
-import {createStackNavigator} from '@react-navigation/stack';
-import {AppNavigator, Login} from '@screens';
-import {NotesProvider, useUserStore} from '@store';
-import {TUserStore} from '@typings';
+import {AppNavigator} from '@screens';
+import {NotesProvider} from '@store';
 import React, {useEffect} from 'react';
 import {useColorScheme, View} from 'react-native';
 import functions from '@react-native-firebase/functions';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -18,14 +16,16 @@ const App = () => {
       .then(response => {
         console.log('good');
       })
-      .catch(er => console.log(er, 'er'));
+      .catch(er => console.log(er, 'er addAdminRole'));
     // addAdminRole()
   }, []);
 
   return (
-    <NotesProvider>
-      <AppNavigator />
-    </NotesProvider>
+    <SafeAreaProvider>
+      <NotesProvider>
+        <AppNavigator />
+      </NotesProvider>
+    </SafeAreaProvider>
   );
 };
 

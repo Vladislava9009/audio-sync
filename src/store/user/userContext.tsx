@@ -12,13 +12,22 @@ type TProps = {
 };
 
 export const NotesProvider = ({children}: TProps) => {
+  let userUpdated = {};
   const userStore = useLocalObservable<Record<string, TUserStore>>(
     createUserStore as any,
   );
   const onAuthStateChanged = (user: any) => {
-    runInAction(() => {
-      userStore.user = user;
-    });
+    user
+      ? user.getIdTokenResult().then((idTokenResult: any) => {
+          user.superAdmin = idTokenResult.claims.superAdmin;
+          userUpdated = {...user, admin: idTokenResult.claims.admin};
+          runInAction(() => {
+            userStore.user = {...user, admin: idTokenResult.claims.admin};
+          });
+        })
+      : runInAction(() => {
+          userStore.user = user;
+        });
   };
   useEffect(() => {
     const subscribe = auth().onAuthStateChanged(onAuthStateChanged);

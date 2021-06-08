@@ -1,23 +1,14 @@
 import * as React from 'react';
 import {ScrollView, Text, FormField, Button, Field, Form} from '@components';
 import api from '@services';
-import {useUserStore, observer} from '@store';
 import {RouteProp, StackNavigationProp, TScreenParams} from '@typings';
-import auth from '@react-native-firebase/auth';
 
 import {styles} from './login.style';
 
-const LoginScreen: React.FC<TProps> = observer(() => {
-  const {user} = useUserStore();
-
-  const onSubmit = (form: any) => {
-    console.log(form);
-    api.signUp(form);
-  };
-
+const LoginScreen: React.FC<TProps> = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={api.signUp}>
         {({handleSubmit, submitting, pristine}) => (
           <>
             <Field name="email">
@@ -34,7 +25,7 @@ const LoginScreen: React.FC<TProps> = observer(() => {
       </Form>
     </ScrollView>
   );
-});
+};
 
 type TProps = {
   navigation: StackNavigationProp<TScreenParams, 'Login'>;
