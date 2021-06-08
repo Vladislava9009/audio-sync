@@ -1,0 +1,39 @@
+---
+to: "<%= componentType === 'ScrollView' ? `src/screens/${h.changeCase.pascal(name)}/${h.changeCase.pascal(name)}.tsx` : null %>"
+---
+import * as React from 'react'
+import { useEffect, useCallback, useMemo, useTranslation, useNavigation, useRoute, useGlobal, useDispatch, useRequest, useState } from '@hooks'
+import { ErrorBoundary, ScrollView, Text } from '@components'
+import { api, alert } from '@services'
+import { StackNavigationProp, RouteProp, TScreenParams } from '@typings'
+import styles from './styles.css'
+
+const <%= h.changeCase.pascal(name) %>Screen: React.FC<TProps> = () => {
+	// Main screen data.
+	const { t } = useTranslation()
+	const { navigate } = useNavigation<TProps["navigation"]>()
+	const { params } = useRoute<TProps["route"]>()
+	
+	// .
+	// const { data: myData, fetching, fetched } = useRequest<[], void>({
+	// 	request: api.getSomething(),
+	// 	onError: (error) => alert.error(error)
+	// })
+	// const [_, set_] = useGlobal('something')
+	// const callSomething = useDispatch('callSomething')
+
+	return (
+		<ErrorBoundary>
+			<ScrollView contentContainerStyle={styles.contentContainer} keyboardShouldPersistTaps="handled" bounces={false}>
+				<Text><%= h.changeCase.pascal(name) %>Screen</Text>
+			</ScrollView>
+		</ErrorBoundary>
+	)
+}
+
+type TProps = {
+	navigation: StackNavigationProp<TScreenParams, '<%= h.changeCase.pascal(name) %>'>
+	route: RouteProp<TScreenParams, '<%= h.changeCase.pascal(name) %>'>
+}
+
+export default <%= h.changeCase.pascal(name) %>Screen;

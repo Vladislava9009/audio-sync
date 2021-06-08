@@ -1,0 +1,11 @@
+---
+inject: true
+to: src/global/global.d.ts
+after: export interface Reducers
+append: true
+---
+		<%= name %>: (
+			global: State,
+			dispatch: Dispatch,
+			args: void
+		) => null;

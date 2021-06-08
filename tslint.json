@@ -1,0 +1,41 @@
+{
+	"defaultSeverity": "error",
+	"compilerOptions": {
+		"experimentalDecorators": true,
+		"resolveJsonModule": true
+	},
+	"extends": [
+		"tslint-config-airbnb",
+		"tslint-config-prettier",
+		"tslint-react"
+	],
+	"jsRules": {},
+	"rules": {
+		"prettier": [
+			true,
+			null,
+			{
+				"editorconfig": false
+			}
+		],
+		"import-name": false,
+		"function-name": false,
+		"semicolon": false,
+		"variable-name": [
+			true,
+			"ban-keywords",
+			"check-format",
+			"allow-leading-underscore",
+			"allow-pascal-case"
+		],
+		"jsx-no-multiline-js": false,
+		"no-increment-decrement": false,
+		"jsx-boolean-value": false,
+		"object-shorthand-properties-first": false,
+		"no-boolean-literal-compare": false,
+		"jsx-wrap-multiline": false
+	},
+	"rulesDirectory": [
+		"tslint-plugin-prettier"
+	]
+}
