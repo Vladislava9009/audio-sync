@@ -4,3 +4,8 @@ export type TAudio = {
 };
 
 export type TAction = 'play' | 'stop' | 'pause';
+
+export type TActiveSound = {
+  audio: TAudio;
+  action: TAction;
+} | null;

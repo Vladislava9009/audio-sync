@@ -1,2 +1,3 @@
 export {AuthStackNavigator} from './auth-stack';
-export {MainStackNavigator} from './main-stack';
+export {MasterStackNavigator} from './master-stack';
+export {SlaveStackNavigator} from './slave-stack';

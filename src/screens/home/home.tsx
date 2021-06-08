@@ -18,6 +18,7 @@ import {styles} from './styles';
 import api, {pause, pickFile, play} from '@services';
 import {ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import database from '@react-native-firebase/database';
 
 const HomeScreen: React.FC<TProps> = () => {
   const [audioList, setAudioList] = React.useState<TAudio[]>([]);
@@ -25,7 +26,6 @@ const HomeScreen: React.FC<TProps> = () => {
     audio: TAudio;
     action: TAction;
   } | null>(null);
-  console.log(activeSound, 'activeSound');
 
   React.useEffect(() => {
     getAudioList();
@@ -48,8 +48,14 @@ const HomeScreen: React.FC<TProps> = () => {
       console.log(er);
     }
   };
-  const onPlayerPress = (action: TAction) => {
-    activeSound && setActiveSound({...activeSound, action});
+  const onPlayerPress = async (action: TAction) => {
+    const data = {...activeSound, action};
+    activeSound && setActiveSound(data as any);
+    try {
+      await api.setActiveAudio(data);
+    } catch (er) {
+      console.log(er);
+    }
     switch (action) {
       case 'pause':
         return pause();
@@ -67,6 +73,7 @@ const HomeScreen: React.FC<TProps> = () => {
         <View style={styles.audioListContainer}>
           {audioList.map(audio => {
             const onItenPress = () => {
+              api.setActiveAudio({audio, action: 'play'});
               setActiveSound({audio, action: 'play'});
             };
             return (

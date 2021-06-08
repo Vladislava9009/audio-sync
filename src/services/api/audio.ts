@@ -1,5 +1,5 @@
 import storage from '@react-native-firebase/storage';
-import {TAudio} from '@typings';
+import database from '@react-native-firebase/database';
 
 export const uploadAudio = async (audio: any) => {
   const blob: any = await new Promise((resolve, reject) => {
@@ -46,18 +46,15 @@ export const getAudioList = async () => {
         meta: await ref.getMetadata(),
         name: ref.name,
       };
-      // audio.url = await getAudioUrl(ref)
-
       return audio;
     }),
   );
   return data;
 };
-const getAudioUrl = async (ref: any) => {
-  try {
-    const url = await ref.getDownloadURL();
-    return url;
-  } catch (er) {
-    return er;
-  }
+
+export const setActiveAudio = async (data: any) => {
+  database()
+    .ref('/activeAudio')
+    .set(data)
+    .then(() => console.log('Data set.'));
 };

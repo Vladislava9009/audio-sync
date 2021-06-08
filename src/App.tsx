@@ -16,7 +16,7 @@ const App = () => {
       .then(response => {
         console.log('good');
       })
-      .catch(er => console.log(er, 'er'));
+      .catch(er => console.log(er, 'er addAdminRole'));
     // addAdminRole()
   }, []);
 

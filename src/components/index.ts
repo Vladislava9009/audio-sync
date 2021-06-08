@@ -1,7 +1,6 @@
 export {
   ScrollView,
   View,
-  Text,
   TextInput,
   Pressable,
   StyleSheet,
@@ -18,7 +17,22 @@ export {Input} from './input';
 export {FormField} from './form-field';
 export {Button} from './button';
 export {Player} from './player';
+export {Line} from './line';
 export {default as ErrorBoundary} from './error-boundary';
+export {default as Text} from './text';
 
 // Form
 export {Field, Form} from 'react-final-form';
+
+//
+export {Avatar, ListItem, Text as RNEText} from 'react-native-elements';
+export {
+  If,
+  Then,
+  Else,
+  When,
+  Unless,
+  Switch as SwitchStatement,
+  Case,
+  Default,
+} from 'react-if';

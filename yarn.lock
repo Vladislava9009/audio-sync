@@ -1689,6 +1689,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-12.0.0.tgz#3e31053318f4925e778822c978835c08b93c12e4"
   integrity sha512-+tudhzegmLOfVKVAD+wgSUXMc5Hc0J3F7cqr8yxYa3vjJEsRTf+F0HsxQOMtJZ7TNIFWyVIoZqzmD4Tb04caCw==
 
+"@react-native-firebase/database@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-12.0.0.tgz#a2e82495752a044d9a59d9dec3984eb190db2ae3"
+  integrity sha512-zfKhoLxMdMpLnnBtoKT7bBUDkxazWy28jsM9blg/NO26Wm+5+oA5EL++AZ0XCySU3O69KJVXtYEaeY5pmVKAUw==
+
 "@react-native-firebase/functions@^12.0.0":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/functions/-/functions-12.0.0.tgz#94829c91690abb8687266b77bb7c7a891aad2646"
@@ -10781,6 +10786,11 @@ react-i18next@*:
   dependencies:
     "@babel/runtime" "^7.14.0"
     html-parse-stringify "^3.0.1"
+
+react-if@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-if/-/react-if-4.0.1.tgz#fd60599f585a55d417d94f9a576047869994fcae"
+  integrity sha512-TyfDGdBrIAHntLM5YkRbszeqcyzucB3m2ddF46XH10wTZ8SE2ZjNPD8qNphTJ+7j36SZ4qMvqmlMntcsczLAXQ==
 
 "react-is@^16.12.0 || ^17.0.0", react-is@^17.0.1:
   version "17.0.2"
