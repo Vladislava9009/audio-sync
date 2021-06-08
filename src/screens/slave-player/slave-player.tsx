@@ -1,19 +1,17 @@
 import * as React from 'react';
 import {Image, Line, Text, View} from '@components';
-import {
-  StackNavigationProp,
-  RouteProp,
-  TScreenParams,
-  TAudio,
-  TAction,
-  TActiveSound,
-} from '@typings';
+import {TActiveSound} from '@typings';
 import {styles} from './styles';
 import database from '@react-native-firebase/database';
 import Images from '@images';
+import {getPlayerActions} from '@helpers';
 
 const SlavePlayer = () => {
   const [activeSound, setActiveSound] = React.useState<TActiveSound>(null);
+
+  React.useEffect(() => {
+    getPlayerActions(activeSound?.action, activeSound);
+  }, [activeSound?.action]);
 
   React.useEffect(() => {
     database()
@@ -23,6 +21,7 @@ const SlavePlayer = () => {
         console.log('User data: ', snapshot.val());
       });
   }, []);
+
   const activeSoundRef = database().ref('activeAudio');
 
   activeSoundRef.on('child_changed', async snapshot => {
@@ -30,7 +29,7 @@ const SlavePlayer = () => {
     setActiveSound(data);
   });
 
-  console.log(activeSound, 'activeSound');
+  const ending = activeSound?.action === 'pause' ? 'd' : 'ed';
 
   return (
     <View style={styles.container}>
@@ -40,7 +39,10 @@ const SlavePlayer = () => {
       ) : (
         <Line marginVertical={140} />
       )}
-      <Text>Currently {activeSound?.action}d</Text>
+      <Text>
+        Currently {activeSound?.action}
+        {ending}
+      </Text>
     </View>
   );
 };

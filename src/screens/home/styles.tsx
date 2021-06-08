@@ -8,4 +8,10 @@ export const styles = StyleSheet.create({
   audioListContainer: {
     flex: 1,
   },
+  audioItem: {
+    backgroundColor: '#000000',
+  },
+  audioItemTitle: {
+    color: '#ffffff',
+  },
 });

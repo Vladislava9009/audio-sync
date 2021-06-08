@@ -1,5 +1,4 @@
-import {TextInput, View, Text, Pressable, Image} from '@components';
-import Images from '@images';
+import {View, Text, Pressable} from '@components';
 import {TAction, TAudio} from '@typings';
 import React, {useMemo} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -21,7 +20,6 @@ export const Player = ({audio, action, onPlayerPress}: TProps) => {
           icon: 'play',
           onPress: () => onPlayerPress('play'),
         };
-        break;
       case 'stop':
         return {
           icon: 'stop',
@@ -37,15 +35,14 @@ export const Player = ({audio, action, onPlayerPress}: TProps) => {
 
   return (
     <>
-      {/* <Image source={Images.MUSIC} style/> */}
       <View style={styles.container}>
         <Text>{name}</Text>
         <View style={styles.iconContainer}>
           <Pressable onPress={onPress}>
-            <Icon name={icon} size={20} />
+            <Icon name={icon} size={20} color="#ffffff" />
           </Pressable>
           <Pressable onPress={onPress}>
-            <Icon name={'ellipsis-v'} size={20} />
+            <Icon name={'ellipsis-v'} size={20} color="#ffffff" />
           </Pressable>
         </View>
       </View>
