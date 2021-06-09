@@ -19,7 +19,7 @@ const AppNavigatorScreen = observer(() => {
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={routeNavigatorScreenOptions}>
-        {!user ? (
+        {!!user ? (
           <RootStack.Screen
             name={routes.AUTH_NAVIGATOR}
             component={AuthStackNavigator}

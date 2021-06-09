@@ -11,6 +11,7 @@ const routes: IHashMap<any> = Object.freeze({
   SLAVE_NAVIGATOR: 'SlaveNavigator',
   AUTH_NAVIGATOR: 'AuthNavigator',
   LOGIN: 'Login',
+  SIGN_UP: ' SignUp',
   AUDIO: 'Audio',
   HOME: 'Home',
   SLAVE_PLAYER: 'SlavePlayer',
